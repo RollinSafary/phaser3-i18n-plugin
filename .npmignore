@@ -1,0 +1,16 @@
+logs
+*.log
+pids
+*.pid
+*.seed
+lib-cov
+lib
+coverage
+.grunt
+.lock-wscript
+build/Release
+node_modules
+definitions
+.idea
+.vscode
+*.tgz
