@@ -1,11 +1,7 @@
 {
   "name": "@candywings/phaser3-i18n-plugin",
-  "version": "1.0.0",
-  "description": "i18n plugin for phaser 3",
-  "author": "RollinSafary",
-  "contributors": [
-    "Rollin Safary <rollinsafary@blotclub.am>"
-  ],
+  "version": "0.0.2",
+  "description": "Simple I18n plugin for Phaser 3",
   "main": "lib/index.js",
   "scripts": {
     "build": "webpack --config config/webpack.config.js --mode production"
@@ -16,16 +12,21 @@
     "issues": "https://bitbucket.org/belot_kings/phaser3-i18n-plugin/issues"
   },
   "types": "./lib/index.d.ts",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "peerDependencies": {
-    "phaser": "^3.20.1"
+    "phaser": "^3.22.0"
   },
-  "dependencies": {
-    "i18next": "^15.0.2",
-    "i18next-xhr-backend": "^2.0.0",
-    "lodash.isequal": "^4.5.0"
-  },
+  "keywords": [
+    "Phaser3",
+    "Phaser",
+    "internationalization",
+    "localization",
+    "i18next",
+    "i18n"
+  ],
   "devDependencies": {
-    "@types/lodash.isequal": "^4.5.5",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "clean-webpack-plugin": "^0.1.19",
     "eslint": "^5.0.1",
@@ -35,7 +36,6 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "git-revision-webpack-plugin": "^3.0.3",
-    "phaser": "^3.20.1",
     "prettier": "^1.13.7",
     "ts-loader": "^4.4.2",
     "tslint": "^5.10.0",
@@ -47,5 +47,9 @@
     "webpack-cli": "^3.0.8",
     "webpack-merge": "^4.1.3"
   },
-  "license": "MIT"
+  "author": "RollinSafary",
+  "license": "MIT",
+  "dependencies": {
+    "eventemitter3": "^3.0.1"
+  }
 }

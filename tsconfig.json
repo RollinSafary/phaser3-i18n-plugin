@@ -1,16 +1,19 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "outDir": "lib",
     "target": "es5",
-    "moduleResolution": "node",
+    "lib": ["es7", "dom"],
     "sourceMap": true,
+    "inlineSources": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": true,
     "isolatedModules": false,
-    "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "es2015.promise", "es5"]
+    "allowSyntheticDefaultImports": true
   },
-  "files": ["src/index.ts"]
+  "include": ["./src/**/*.ts"],
+  "files": ["./definitions/phaser.d.ts"]
 }
