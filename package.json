@@ -1,6 +1,6 @@
 {
   "name": "@candywings/phaser3-i18n-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple I18n plugin for Phaser 3",
   "main": "lib/index.js",
   "scripts": {
@@ -8,8 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/belot_kings/phaser3-i18n-plugin.git",
-    "issues": "https://bitbucket.org/belot_kings/phaser3-i18n-plugin/issues"
+    "url": "https://github.com/BlotClub/phaser3-i18n-plugin.git",
+    "issues": "https://github.com/BlotClub/phaser3-i18n-plugin/issues"
   },
   "types": "./lib/index.d.ts",
   "publishConfig": {
