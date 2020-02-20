@@ -95,6 +95,8 @@ export default class Game extends I18nGame {
       language: 'en',
       valueInjectorOpener: '{{',
       valueInjectorCloser: '}}',
+      fontMappings: [] // More info in CHANGELOG v1.0.1
+      bitmapFontMappings: [] // More info in CHANGELOG v1.0.1
     });
   }
 }
@@ -148,3 +150,47 @@ export default class BootScene extends BaseScene {
   }
 }
 ```
+
+All scenes extended from I18nScene have `i18n` proeprty, but that's not a copy of plugin instance, it's just a reference to `Game`'s `i18n` property.
+
+#### Change language
+
+To change game language you need just call to call
+from scene: `this.i18n.changeLanguage(languageToSwitch)` or `this.game.i18n.changeLanguage(languageToSwitch)`,
+from gameObject: `this.scene.i18n.changeLanguage(languageToSwitch)`. Don't forget that your gameObject's scene must be extended from `I18nScene`, to have property `i18n` in it.
+
+## Possible mistakes in usage
+
+1. If you have original text object, it won't listen language change event and won't translate it's text.
+2. Plugin config `fontMappings` applies only on `ExtendedText` objects and not `ExtendedBitmapText` or `ExtendedDynamicBitmapText` objects. Same for `bitmapFontMappings`.
+
+## Best practice
+
+1. If you want to use concated translations, the best way is to use original text object and listen for `I18nPlugin.LANGUAGE_CHANGED_EVENT` on `this.i18n` (if you're in scene) or `this.scene.i18n`.
+2. For typescript users: if you have custom gameObject, and logic in it, to say that it's scene is `I18nScene` extended just add in you class
+
+```
+protected scene: I18nScene
+```
+
+example
+
+Method 1:
+
+```
+export class MyCustomGameObject extends Phaser.GameObjects.GameObject {
+  protected scene: I18nScene
+}
+```
+
+Method 2:
+
+```
+export class MyCustomGameObject extends Phaser.GameObjects.GameObject {
+  constructor(protected scene: I18nScene, ...args){
+    super(scene, ...args)
+  }
+}
+```
+
+# License MIT

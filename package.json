@@ -1,6 +1,6 @@
 {
   "name": "@candywings/phaser3-i18n-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple I18n plugin for Phaser 3",
   "main": "lib/index.js",
   "scripts": {
