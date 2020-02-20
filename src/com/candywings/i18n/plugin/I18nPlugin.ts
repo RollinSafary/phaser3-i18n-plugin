@@ -2,7 +2,7 @@ import { I18nConfig, I18nLangaugeData, I18nScene, StringIndexedObject } from "..
 import { addExtendedTextGameObjects } from "./Utils";
 
 export default class I18nPlugin extends Phaser.Events.EventEmitter {
-  protected currentJSON: any;
+  protected currentJSON: StringIndexedObject;
   protected currentLanguageData: I18nLangaugeData;
   protected previuseLanguage: string;
 
@@ -17,7 +17,7 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
     this.changeLanguage(language);
   }
 
-  public translate(key: string = '', options: any): string {
+  public translate(key: string = '', options: StringIndexedObject): string {
     if (!key || key === '') {
       return '';
     }
@@ -70,11 +70,12 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
       const fontMappingObject: StringIndexedObject = this.config.fontMappings.find((value: StringIndexedObject) => {
         return value[this.previuseLanguage] === oldFontName
       })
-      return fontMappingObject[this.currentLanguageData.key] || oldFontName
+      return fontMappingObject ? fontMappingObject[this.currentLanguageData.key] : oldFontName
     } else {
-      return this.config.fontMappings ? this.config.fontMappings.find((value: StringIndexedObject) => {
+      const fontsMappingObject: StringIndexedObject = this.config.fontMappings ? this.config.fontMappings.find((value: StringIndexedObject) => {
         return value[this.currentLanguageData.key] === oldFontName
-      })[this.currentLanguageData.key] : oldFontName
+      }) : null
+      return fontsMappingObject ? fontsMappingObject[this.currentLanguageData.key] : oldFontName
     }
   }
   public getBitmapFont(oldFontName: string): string {
@@ -82,11 +83,12 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
       const fontMappingObject: StringIndexedObject = this.config.bitmapFontMappings.find((value: StringIndexedObject) => {
         return value[this.previuseLanguage] === oldFontName
       })
-      return fontMappingObject[this.currentLanguageData.key] || oldFontName
+      return fontMappingObject ? fontMappingObject[this.currentLanguageData.key] : oldFontName
     } else {
-      return this.config.bitmapFontMappings ? this.config.bitmapFontMappings.find((value: StringIndexedObject) => {
+      const fontsMappingObject: StringIndexedObject = this.config.bitmapFontMappings ? this.config.bitmapFontMappings.find((value: StringIndexedObject) => {
         return value[this.currentLanguageData.key] === oldFontName
-      })[this.currentLanguageData.key] : oldFontName
+      }) : null
+      return fontsMappingObject ? fontsMappingObject[this.currentLanguageData.key] : oldFontName
     }
   }
 }
