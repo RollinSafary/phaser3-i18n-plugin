@@ -1,7 +1,12 @@
-import I18nPlugin from "../plugin/I18nPlugin";
-import { ExtendedDynamicBitmapTextConfig, I18nScene, I18nSceneInterface } from "./Interfaces";
+import I18nPlugin from '../plugin/I18nPlugin';
+import {
+  ExtendedDynamicBitmapTextConfig,
+  I18nScene,
+  I18nSceneInterface,
+} from './Interfaces';
 
-export default class ExtendedDynamicBitmapText extends Phaser.GameObjects.BitmapText {
+export default class ExtendedDynamicBitmapText extends Phaser.GameObjects
+  .BitmapText {
   public static Creator(
     options: ExtendedDynamicBitmapTextConfig,
     addToScene: boolean = false,
@@ -47,8 +52,8 @@ export default class ExtendedDynamicBitmapText extends Phaser.GameObjects.Bitmap
     return gameObject;
   }
 
-  private i18n: I18nPlugin;
-  private i18nKey: string;
+  protected i18n: I18nPlugin;
+  protected i18nKey: string;
 
   constructor(
     protected scene: I18nScene | Phaser.Scene & I18nSceneInterface,
@@ -58,16 +63,26 @@ export default class ExtendedDynamicBitmapText extends Phaser.GameObjects.Bitmap
     text: string,
     size: number,
     align: number,
-    private i18nOptions: any,
+    protected i18nOptions: any,
   ) {
     super(scene, x, y, font, text, size, align);
-    this.i18n = this.scene.i18n;
     this.i18nKey = text;
-    this.setText(this.i18nKey, this.i18nOptions);
-    this.i18n.on(I18nPlugin.LANGUAGE_CHANGED_EVENT, this.onLanguageChange, this);
+    this.scene.i18n
+      ? this.prepare()
+      : this.scene.events.once(Phaser.Scenes.Events.CREATE, this.prepare, this);
   }
 
-  private onLanguageChange(): void {
+  protected prepare(): void {
+    this.i18n = this.scene.i18n;
+    this.setText(this.i18nKey, this.i18nOptions);
+    this.i18n.on(
+      I18nPlugin.LANGUAGE_CHANGED_EVENT,
+      this.onLanguageChange,
+      this,
+    );
+  }
+
+  protected onLanguageChange(): void {
     this.emit(I18nPlugin.LANGUAGE_CHANGED_EVENT);
     this.setText();
   }
@@ -78,7 +93,9 @@ export default class ExtendedDynamicBitmapText extends Phaser.GameObjects.Bitmap
   ): this {
     this.i18nKey = value;
     this.i18nOptions = options;
-    const newFont: string = this.i18n ? this.i18n.getBitmapFont(this.font) : null
+    const newFont: string = this.i18n
+      ? this.i18n.getBitmapFont(this.font)
+      : null;
     !!newFont && this.setFont(newFont);
     return value
       ? this.i18n
@@ -88,8 +105,11 @@ export default class ExtendedDynamicBitmapText extends Phaser.GameObjects.Bitmap
   }
 
   public destroy(fromScene?: boolean): void {
-    this.i18n.off(I18nPlugin.LANGUAGE_CHANGED_EVENT, this.onLanguageChange, this);
+    this.i18n.off(
+      I18nPlugin.LANGUAGE_CHANGED_EVENT,
+      this.onLanguageChange,
+      this,
+    );
     super.destroy(fromScene);
   }
 }
-

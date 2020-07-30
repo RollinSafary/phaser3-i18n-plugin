@@ -1,36 +1,36 @@
-import I18nPlugin from "../plugin/I18nPlugin";
-import ExtendedBitmapText from "./ExtendedBitmapText";
-import ExtendedDynamicBitmapText from "./ExtendedDynamicBitmapText";
-import ExtendedText from "./ExtendedText";
+import I18nPlugin from '../plugin/I18nPlugin';
+import ExtendedBitmapText from './ExtendedBitmapText';
+import ExtendedDynamicBitmapText from './ExtendedDynamicBitmapText';
+import ExtendedText from './ExtendedText';
 
 export class I18nScene extends Phaser.Scene {
-  public add: Phaser.GameObjects.GameObjectFactory & I18nFactory
-  public make: Phaser.GameObjects.GameObjectCreator & I18nCreator
-  public i18n: I18nPlugin
+  public add: Phaser.GameObjects.GameObjectFactory & I18nFactory;
+  public make: Phaser.GameObjects.GameObjectCreator & I18nCreator;
+  public i18n: I18nPlugin;
 }
 export class I18nGame extends Phaser.Game {
-  public i18n: I18nPlugin
+  public i18n: I18nPlugin;
 }
 
 export interface I18nSceneInterface {
-  add: Phaser.GameObjects.GameObjectFactory & I18nFactory
-  make: Phaser.GameObjects.GameObjectCreator & I18nCreator
-  i18n: I18nPlugin
+  add: Phaser.GameObjects.GameObjectFactory & I18nFactory;
+  make: Phaser.GameObjects.GameObjectCreator & I18nCreator;
+  i18n: I18nPlugin;
 }
 export interface I18nGameInterface {
-  i18n: I18nPlugin
+  i18n: I18nPlugin;
 }
 
 export interface I18nConfig {
-  languages: I18nLangaugeData[];
+  languages: I18nLanguageData[];
   language: string;
   valueInjectorOpener: string;
   valueInjectorCloser: string;
-  fontMappings?: StringIndexedObject[]
-  bitmapFontMappings?: StringIndexedObject[]
+  fontMappings?: StringIndexedObject[];
+  bitmapFontMappings?: StringIndexedObject[];
 }
 
-export interface I18nLangaugeData {
+export interface I18nLanguageData {
   key: string;
   keyJSON: string;
 }
@@ -75,7 +75,6 @@ export interface I18nFactory {
   ) => ExtendedDynamicBitmapText;
 }
 
-
 export interface ExtendedTextConfig {
   x: number;
   y: number;
@@ -104,4 +103,4 @@ export interface ExtendedDynamicBitmapTextConfig {
   i18nOptions?: any;
 }
 
-export type StringIndexedObject = { [key: string]: string }
+export type StringIndexedObject = { [key: string]: string };

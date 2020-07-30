@@ -1,10 +1,15 @@
-import { I18nConfig, I18nLangaugeData, I18nScene, StringIndexedObject } from "../extensions/Interfaces";
-import { addExtendedTextGameObjects } from "./Utils";
+import {
+  I18nConfig,
+  I18nLanguageData,
+  I18nScene,
+  StringIndexedObject,
+} from '../extensions/Interfaces';
+import { addExtendedTextGameObjects } from './Utils';
 
 export default class I18nPlugin extends Phaser.Events.EventEmitter {
   protected currentJSON: StringIndexedObject;
-  protected currentLanguageData: I18nLangaugeData;
-  protected previuseLanguage: string;
+  protected currentLanguageData: I18nLanguageData;
+  protected previousLanguage: string;
 
   public static LANGUAGE_CHANGED_EVENT: string = 'languageChanged';
 
@@ -30,9 +35,11 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
       if (options) {
         const optionKeys: string[] = Object.keys(options);
         for (const optionKey of optionKeys) {
-          const valueIjectionString: string = `${this.config.valueInjectorOpener}${optionKey}${this.config.valueInjectorCloser}`;
+          const valueInjectionString: string = `${
+            this.config.valueInjectorOpener
+          }${optionKey}${this.config.valueInjectorCloser}`;
           translation = translation.replace(
-            valueIjectionString,
+            valueInjectionString,
             `${options[optionKey]}`,
           );
         }
@@ -42,9 +49,11 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
   }
 
   public changeLanguage(language: string): void {
-    this.previuseLanguage = this.currentLanguageData ? this.currentLanguageData.key : null
+    this.previousLanguage = this.currentLanguageData
+      ? this.currentLanguageData.key
+      : null;
     this.currentLanguageData = this.config.languages.find(
-      (languageData: I18nLangaugeData) => languageData.key === language,
+      (languageData: I18nLanguageData) => languageData.key === language,
     );
     if (!!this.currentLanguageData) {
       this.config.language = language;
@@ -54,41 +63,61 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
   }
 
   protected updateCurrentLanguageObject(): void {
-    this.currentJSON = this.game.cache.json.get(this.langaugeKey);
+    this.currentJSON = this.game.cache.json.get(this.languageKey);
   }
 
   protected get scenes(): I18nScene[] {
     return this.game.scene.getScenes() as I18nScene[];
   }
 
-  protected get langaugeKey(): string {
-    return this.config.language
+  protected get languageKey(): string {
+    return this.config.language;
   }
 
   public getFont(oldFontName: string): string {
-    if (this.previuseLanguage && this.config.fontMappings) {
-      const fontMappingObject: StringIndexedObject = this.config.fontMappings.find((value: StringIndexedObject) => {
-        return value[this.previuseLanguage] === oldFontName
-      })
-      return fontMappingObject ? fontMappingObject[this.currentLanguageData.key] : oldFontName
+    if (this.previousLanguage && this.config.fontMappings) {
+      const fontMappingObject: StringIndexedObject = this.config.fontMappings.find(
+        (value: StringIndexedObject) => {
+          return (
+            value[this.previousLanguage] === oldFontName ||
+            value[this.languageKey] === oldFontName
+          );
+        },
+      );
+      return fontMappingObject
+        ? fontMappingObject[this.currentLanguageData.key]
+        : oldFontName;
     } else {
-      const fontsMappingObject: StringIndexedObject = this.config.fontMappings ? this.config.fontMappings.find((value: StringIndexedObject) => {
-        return value[this.currentLanguageData.key] === oldFontName
-      }) : null
-      return fontsMappingObject ? fontsMappingObject[this.currentLanguageData.key] : oldFontName
+      const fontsMappingObject: StringIndexedObject = this.config.fontMappings
+        ? this.config.fontMappings.find((value: StringIndexedObject) => {
+            return value[this.currentLanguageData.key] === oldFontName;
+          })
+        : null;
+      return fontsMappingObject
+        ? fontsMappingObject[this.currentLanguageData.key]
+        : oldFontName;
     }
   }
   public getBitmapFont(oldFontName: string): string {
-    if (this.previuseLanguage && this.config.bitmapFontMappings) {
-      const fontMappingObject: StringIndexedObject = this.config.bitmapFontMappings.find((value: StringIndexedObject) => {
-        return value[this.previuseLanguage] === oldFontName
-      })
-      return fontMappingObject ? fontMappingObject[this.currentLanguageData.key] : oldFontName
+    if (this.previousLanguage && this.config.bitmapFontMappings) {
+      const fontMappingObject: StringIndexedObject = this.config.bitmapFontMappings.find(
+        (value: StringIndexedObject) => {
+          return value[this.previousLanguage] === oldFontName;
+        },
+      );
+      return fontMappingObject
+        ? fontMappingObject[this.currentLanguageData.key]
+        : oldFontName;
     } else {
-      const fontsMappingObject: StringIndexedObject = this.config.bitmapFontMappings ? this.config.bitmapFontMappings.find((value: StringIndexedObject) => {
-        return value[this.currentLanguageData.key] === oldFontName
-      }) : null
-      return fontsMappingObject ? fontsMappingObject[this.currentLanguageData.key] : oldFontName
+      const fontsMappingObject: StringIndexedObject = this.config
+        .bitmapFontMappings
+        ? this.config.bitmapFontMappings.find((value: StringIndexedObject) => {
+            return value[this.currentLanguageData.key] === oldFontName;
+          })
+        : null;
+      return fontsMappingObject
+        ? fontsMappingObject[this.currentLanguageData.key]
+        : oldFontName;
     }
   }
 }
