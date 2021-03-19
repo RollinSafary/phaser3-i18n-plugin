@@ -1,22 +1,14 @@
 {
-  "name": "@candywings/phaser3-i18n-plugin",
-  "version": "1.0.4",
-  "description": "Simple I18n plugin for Phaser 3",
+  "name": "@rollinsafary/phaser3-i18n-plugin",
+  "version": "1.0.0",
+  "description": "i18n plugin for phaser3",
   "main": "lib/index.js",
   "scripts": {
     "build": "webpack --config config/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlotClub/phaser3-i18n-plugin.git",
-    "issues": "https://github.com/BlotClub/phaser3-i18n-plugin/issues"
-  },
-  "types": "./lib/index.d.ts",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
-  "peerDependencies": {
-    "phaser": "^3.22.0"
+    "url": "git+https://github.com/RollinSafary/phaser3-i18n-plugin.git"
   },
   "keywords": [
     "Phaser3",
@@ -26,6 +18,15 @@
     "i18next",
     "i18n"
   ],
+  "author": {
+    "name": "RollinSafary",
+    "email": "rollinsafary@hotmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RollinSafary/phaser3-i18n-plugin/issues"
+  },
+  "homepage": "https://github.com/RollinSafary/phaser3-i18n-plugin#readme",
   "devDependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "clean-webpack-plugin": "^0.1.19",
@@ -47,8 +48,6 @@
     "webpack-cli": "^3.0.8",
     "webpack-merge": "^4.1.3"
   },
-  "author": "RollinSafary",
-  "license": "MIT",
   "dependencies": {
     "eventemitter3": "^3.0.1"
   }

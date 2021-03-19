@@ -1,22 +1,24 @@
 import I18nPlugin from '../plugin/I18nPlugin';
 import {
-  ExtendedTextConfig,
+  ExtendedBitmapTextConfig,
   I18nScene,
   I18nSceneInterface,
 } from './Interfaces';
 
-export default class ExtendedText extends Phaser.GameObjects.Text {
+export default class ExtendedBitmapText extends Phaser.GameObjects.BitmapText {
   public static Creator(
-    options: ExtendedTextConfig,
+    options: ExtendedBitmapTextConfig,
     addToScene: boolean = false,
-  ): ExtendedText {
-    const gameObject: ExtendedText = new ExtendedText(
+  ): ExtendedBitmapText {
+    const gameObject: ExtendedBitmapText = new ExtendedBitmapText(
       // @ts-ignore
       this.scene,
       options.x,
       options.y,
+      options.font,
       options.text,
-      options.style,
+      options.size,
+      options.align,
       options.i18nOptions,
     );
     // @ts-ignore
@@ -27,17 +29,21 @@ export default class ExtendedText extends Phaser.GameObjects.Text {
   public static Factory(
     x: number,
     y: number,
+    font: string,
     text: string,
-    style: any,
+    size: number,
+    align: number,
     i18nOptions: any,
-  ): ExtendedText {
-    const gameObject: ExtendedText = new ExtendedText(
+  ): ExtendedBitmapText {
+    const gameObject: ExtendedBitmapText = new ExtendedBitmapText(
       // @ts-ignore
       this.scene,
       x,
       y,
+      font,
       text,
-      style,
+      size,
+      align,
       i18nOptions,
     );
     // @ts-ignore
@@ -47,15 +53,18 @@ export default class ExtendedText extends Phaser.GameObjects.Text {
 
   protected i18n: I18nPlugin;
   protected i18nKey: string;
+
   constructor(
-    protected scene: I18nScene | Phaser.Scene & I18nSceneInterface,
+    public scene: I18nScene | Phaser.Scene & I18nSceneInterface,
     x: number,
     y: number,
+    font: string,
     text: string,
-    style: any,
+    size: number,
+    align: number,
     protected i18nOptions: any,
   ) {
-    super(scene, x, y, text || ' ', style);
+    super(scene, x, y, font, text, size, align);
     this.i18nKey = text;
     this.scene.i18n
       ? this.prepare()
@@ -80,13 +89,13 @@ export default class ExtendedText extends Phaser.GameObjects.Text {
   public setText(
     value: string = this.i18nKey,
     options: any = this.i18nOptions,
-  ): Phaser.GameObjects.Text {
+  ): this {
     this.i18nKey = value;
     this.i18nOptions = options;
     const newFont: string = this.i18n
-      ? this.i18n.getFont(this.style.fontFamily)
+      ? this.i18n.getBitmapFont(this.font)
       : null;
-    !!newFont && this.setFontFamily(newFont);
+    !!newFont && this.setFont(newFont);
     return value
       ? this.i18n
         ? super.setText(this.i18n.translate(this.i18nKey, this.i18nOptions))
@@ -94,12 +103,12 @@ export default class ExtendedText extends Phaser.GameObjects.Text {
       : this;
   }
 
-  public destroy(fromScene?: boolean): void {
+  public destroy(): void {
     this.i18n.off(
       I18nPlugin.LANGUAGE_CHANGED_EVENT,
       this.onLanguageChange,
       this,
     );
-    super.destroy(fromScene);
+    super.destroy();
   }
 }

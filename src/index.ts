@@ -1,12 +1,12 @@
 export {
   default as ExtendedBitmapText,
-} from './com/candywings/i18n/extensions/ExtendedBitmapText';
+} from './extensions/ExtendedBitmapText';
 export {
   default as ExtendedDynamicBitmapText,
-} from './com/candywings/i18n/extensions/ExtendedDynamicBitmapText';
+} from './extensions/ExtendedDynamicBitmapText';
 export {
   default as ExtendedText,
-} from './com/candywings/i18n/extensions/ExtendedText';
+} from './extensions/ExtendedText';
 export {
   ExtendedBitmapTextConfig,
   ExtendedDynamicBitmapTextConfig,
@@ -19,5 +19,5 @@ export {
   I18nLanguageData as I18nLangaugeData,
   I18nScene,
   I18nSceneInterface,
-} from './com/candywings/i18n/extensions/Interfaces';
-export { default as I18nPlugin } from './com/candywings/i18n/plugin/I18nPlugin';
+} from './extensions/Interfaces';
+export { default as I18nPlugin } from './plugin/I18nPlugin';

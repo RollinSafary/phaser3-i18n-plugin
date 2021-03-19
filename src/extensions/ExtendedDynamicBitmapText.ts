@@ -1,16 +1,17 @@
 import I18nPlugin from '../plugin/I18nPlugin';
 import {
-  ExtendedBitmapTextConfig,
+  ExtendedDynamicBitmapTextConfig,
   I18nScene,
   I18nSceneInterface,
 } from './Interfaces';
 
-export default class ExtendedBitmapText extends Phaser.GameObjects.BitmapText {
+export default class ExtendedDynamicBitmapText extends Phaser.GameObjects
+  .BitmapText {
   public static Creator(
-    options: ExtendedBitmapTextConfig,
+    options: ExtendedDynamicBitmapTextConfig,
     addToScene: boolean = false,
-  ): ExtendedBitmapText {
-    const gameObject: ExtendedBitmapText = new ExtendedBitmapText(
+  ): ExtendedDynamicBitmapText {
+    const gameObject: ExtendedDynamicBitmapText = new ExtendedDynamicBitmapText(
       // @ts-ignore
       this.scene,
       options.x,
@@ -34,17 +35,17 @@ export default class ExtendedBitmapText extends Phaser.GameObjects.BitmapText {
     size: number,
     align: number,
     i18nOptions: any,
-  ): ExtendedBitmapText {
-    const gameObject: ExtendedBitmapText = new ExtendedBitmapText(
+  ): ExtendedDynamicBitmapText {
+    const gameObject: ExtendedDynamicBitmapText = new ExtendedDynamicBitmapText(
       // @ts-ignore
       this.scene,
       x,
       y,
       font,
       text,
+      i18nOptions,
       size,
       align,
-      i18nOptions,
     );
     // @ts-ignore
     this.scene.add.existing(gameObject);
@@ -55,7 +56,7 @@ export default class ExtendedBitmapText extends Phaser.GameObjects.BitmapText {
   protected i18nKey: string;
 
   constructor(
-    protected scene: I18nScene | Phaser.Scene & I18nSceneInterface,
+    public scene: I18nScene | Phaser.Scene & I18nSceneInterface,
     x: number,
     y: number,
     font: string,
@@ -103,12 +104,12 @@ export default class ExtendedBitmapText extends Phaser.GameObjects.BitmapText {
       : this;
   }
 
-  public destroy(fromScene?: boolean): void {
+  public destroy(): void {
     this.i18n.off(
       I18nPlugin.LANGUAGE_CHANGED_EVENT,
       this.onLanguageChange,
       this,
     );
-    super.destroy(fromScene);
+    super.destroy();
   }
 }
