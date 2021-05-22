@@ -5,7 +5,7 @@
 1 - Clone your fork of the repository:
 
 ```
-$ git clone https://github.com/RollinSafary/phaser3-i18n-plugin.git.git
+$ git clone https://github.com/RollinSafary/phaser3-i18n-plugin.git
 ```
 
 2 - Install npm dependencies using yarn:
