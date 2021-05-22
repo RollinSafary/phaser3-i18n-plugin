@@ -43,14 +43,12 @@ const libConfig = merge([
 
   parts.loadJs({}),
 
-  parts.sourceMaps('source-map'),
-
   parts.cleanup(),
 
   parts.attachRevision(),
 ]);
 
-module.exports = env => {
+module.exports = (env) => {
   const config = merge(libConfig);
 
   return config;

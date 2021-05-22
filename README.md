@@ -117,11 +117,11 @@ export default class BaseScene extends I18nScene {
 }
 ```
 
-(if you are using other plugin that adds something to scene's factory and creator, for example "@koreez/phaser3-ninepatch@^1.2.5 plugin)
+(if you are using other plugin that adds something to scene's factory and creator, for example "@rollinsafary/phaser3-ninepatch-plugin" plugin)
 
 ```
-import { I18nCreator, I18nFactory, I18nPlugin } from '@candywings/phaser3-i18n-plugin';
-import { INinePatchCreator, INinePatchFactory } from '@koreez/phaser3-ninepatch';
+import { I18nCreator, I18nFactory, I18nPlugin } from '@rollinsafary/phaser3-i18n-plugin';
+import { INinePatchCreator, INinePatchFactory } from '@rollinsafary/phaser3-ninepatch-plugin';
 
 
 export default class BootScene extends Phaser.Scene {
