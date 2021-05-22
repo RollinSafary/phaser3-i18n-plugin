@@ -1,6 +1,6 @@
 {
   "name": "@rollinsafary/phaser3-i18n-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "i18n plugin for phaser3",
   "main": "lib/index.js",
   "scripts": {
@@ -22,33 +22,33 @@
     "name": "RollinSafary",
     "email": "rollinsafary@hotmail.com"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/RollinSafary/phaser3-i18n-plugin/issues"
   },
   "homepage": "https://github.com/RollinSafary/phaser3-i18n-plugin#readme",
+  "peerDependencies": {
+    "phaser": "3.54.0"
+  },
   "devDependencies": {
-    "case-sensitive-paths-webpack-plugin": "^2.1.2",
-    "clean-webpack-plugin": "^0.1.19",
-    "eslint": "^5.0.1",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "git-revision-webpack-plugin": "^3.0.3",
-    "prettier": "^1.13.7",
-    "ts-loader": "^4.4.2",
-    "tslint": "^5.10.0",
-    "tslint-config-prettier": "^1.13.0",
-    "tslint-loader": "^3.6.0",
-    "typescript": "^2.9.2",
-    "webpack": "^4.14.0",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.0.8",
-    "webpack-merge": "^4.1.3"
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "git-revision-webpack-plugin": "^5.0.0",
+    "prettier": "^2.3.0",
+    "ts-loader": "^9.2.1",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
-    "eventemitter3": "^3.0.1"
+    "eventemitter3": "^4.0.7"
   }
 }

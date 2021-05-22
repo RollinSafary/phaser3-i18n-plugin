@@ -1,11 +1,11 @@
 const path = require('path');
-const merge = require('webpack-merge');
-const packagejson = require('../package.json');
+const { merge } = require('webpack-merge');
+const packageJson = require('../package.json');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 const parts = require('./webpack.parts.config');
 
-let main = packagejson.main;
+let main = packageJson.main;
 main = main.replace(/^.*[\\/]/, '');
 
 const libraryName = main.substring(0, main.lastIndexOf('.'));
@@ -45,7 +45,7 @@ const libConfig = merge([
 
   parts.sourceMaps('source-map'),
 
-  parts.cleanup([paths.dist]),
+  parts.cleanup(),
 
   parts.attachRevision(),
 ]);
