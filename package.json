@@ -1,6 +1,6 @@
 {
   "name": "@rollinsafary/phaser3-i18n-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "i18n plugin for phaser3",
   "main": "lib/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/RollinSafary/phaser3-i18n-plugin#readme",
   "peerDependencies": {
-    "phaser": "3.54.0"
+    "phaser": "^3.54.0"
   },
   "devDependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
