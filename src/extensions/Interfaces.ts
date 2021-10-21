@@ -24,6 +24,7 @@ export interface I18nGameInterface {
 export interface I18nConfig {
   languages: I18nLanguageData[];
   language: string;
+  fallbackLanguage?: string;
   valueInjectorOpener: string;
   valueInjectorCloser: string;
   fontMappings?: StringIndexedObject[];
