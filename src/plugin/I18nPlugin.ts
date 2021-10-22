@@ -38,7 +38,7 @@ export default class I18nPlugin extends Phaser.Events.EventEmitter {
         if (!this.currentJSON) {
             return this.fallbackLanguageData ? this.fallbackJSON[key] : key;
         }
-        let translation: string = this.currentJSON[key];
+        let translation: string = !!this.currentJSON[key] ? this.currentJSON[key] : this.fallbackJSON[key];
         if (!!translation) {
             if (options) {
                 const optionKeys: string[] = Object.keys(options);
