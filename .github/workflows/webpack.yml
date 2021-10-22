@@ -27,7 +27,6 @@ jobs:
         npm install
         npm run build
     - name: Authentication
-      run: 
-        npm-cli-login -u rollinsafary -p ${{ secrets.PASSWORD }} -e rollinsafary@hotmail.com
+      run: npm-cli-login -u rollinsafary -p ${{ secrets.PASSWORD }} -e rollinsafary@hotmail.com
     - name: Publishing
-        npm publish
+      run: npm publish
